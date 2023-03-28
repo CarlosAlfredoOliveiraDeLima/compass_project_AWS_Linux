@@ -1,10 +1,23 @@
+#########################################################
+#   Script para criação de instância EC2 com pair-key,
+#   security group com portas requeridas configuradas,
+#   Elastic-IP e demais mais configurações
+#
+#   Projeto estágio em DevSecOps - AWS / Compass.UOL
+#
+#   Carlos Alfredo Oliveira de Lima
+#   28/03/2023
+#########################################################
+
 #Key-pair creation for Compass project
 ec2_key_pair_name="key_pair_projeto_compass"
-aws ec2 create-key-pair --key-name "$ec2_key_pair_name" --query 'KeyMaterial' --output text > ~/.ssh/key_testing.pem
+aws ec2 create-key-pair --key-name "$ec2_key_pair_name" --query 'KeyMaterial' --output text > ~/.ssh/key_pair_projeto_compass.pem
 
 
 #querying vpc id
 vpc_vpc_id=$(aws ec2 describe-vpcs --filters --query "Vpcs[0].VpcId" --output text)
+
+
 sleep 3
 
 
@@ -78,7 +91,6 @@ do
     status2=$(aws ec2 describe-instance-status --instance-ids $id_instancia --query "InstanceStatuses[*].InstanceStatus.Status" --output text)
     sleep 10
 done
-
 echo "Instancia em plena operação!"
 echo "Estado da instância: $state. Status da instância $status1/$status2"
 
