@@ -7,6 +7,8 @@
 #   28/03/2023
 #########################################################
 
+cd ~/
+
 yum update
 yum upgrade
 yum install nfs-utils
