@@ -70,3 +70,10 @@ ebs_type="gp3"
 id_instancia=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=$ec2_instance_tag_name" --query "Reservations[*].Instances[*].InstanceId" --output text)
 publicDnsName=$(aws ec2 describe-instances --instance-ids $id_instancia --query "Reservations[*].Instances[*].PublicDnsName" --output text)
 
+
+#Allocate a Elastic Ip and getting the Fixed PublicIp 
+elastic_public_ip=$(aws ec2 allocate-address)
+elastic_public_ip=$(echo $elastic_public_ip | jq -r '.PublicIp') #jq é um processador de json para bash/shell caso não possua no PC instale primeiramente
+
+#Associate a Elastic IP
+
