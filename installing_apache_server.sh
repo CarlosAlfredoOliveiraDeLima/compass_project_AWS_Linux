@@ -1,6 +1,7 @@
 #########################################################
 #   Script para instalação e disponibilização de servidor
-#   Apache
+#   Apache caso não tenha sido instalado através do
+#   apache_server_script.sh como argumento do --user-data
 #
 #   Projeto estágio em DevSecOps - AWS / Compass.UOL
 #

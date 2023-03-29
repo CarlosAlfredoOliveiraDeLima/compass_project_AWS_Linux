@@ -10,8 +10,8 @@
 #########################################################
 
 #Key-pair creation for Compass project
-ec2_key_pair_name="key_pair_projeto_compass"
-aws ec2 create-key-pair --key-name "$ec2_key_pair_name" --query 'KeyMaterial' --output text > ~/.ssh/key_pair_projeto_compass.pem
+ec2_key_pair_name="key_pair_projeto_compass_teste"
+aws ec2 create-key-pair --key-name "$ec2_key_pair_name" --query 'KeyMaterial' --output text > ~/.ssh/key_pair_projeto_compass_teste.pem
 
 
 #querying vpc id
@@ -26,7 +26,7 @@ vpc_sn_id=$(aws ec2 describe-subnets --filters "Name=availability-zone,Values=us
 
 
 #Security group definition
-ec2_sg_name="sg_projeto_compass"
+ec2_sg_name="sg_projeto_compass_teste"
 ec2_sg_description="Security-group criado para o projeto de Linux e AWS da Compass.UOL"
 aws ec2 create-security-group --group-name "$ec2_sg_name" --description "$ec2_sg_description" --vpc-id vpc-06d802272a5329f40
 
@@ -71,6 +71,7 @@ aws ec2 run-instances \
 --key-name "$ec2_key_pair_name" \
 --security-group-ids "$ec2_sg_id" \
 --subnet-id "$vpc_sn_id" \
+--user-data file://apache_server_script.sh \
 --region "$ec2_region" \
 --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$ec2_instance_tag_name}, {Key=CostCenter,Value=$ec2_instance_tag_costcenter}, {Key=Project,Value=$ec2_instance_tag_project}]" \
 "ResourceType=volume,Tags=[{Key=Name,Value=$ec2_instance_tag_name}, {Key=CostCenter,Value=$ec2_instance_tag_costcenter}, {Key=Project,Value=$ec2_instance_tag_project}]" \
