@@ -6,7 +6,7 @@
 #   tipo log do status do servidor em /home/ec2-user/efs
 #
 #   O diretório efs é um network file system do AWS EFS 
-
+#
 #   Projeto estágio em DevSecOps - AWS / Compass.UOL
 #
 #   Carlos Alfredo Oliveira de Lima
@@ -25,6 +25,3 @@ else
     echo -e "$data_hora - $nome_service. $message" >> /home/ec2-user/efs/log_offline
 fi
 echo -e "$data_hora - $nome_service. $message" >> /home/ec2-user/efs/log_general
-
-echo $message
-
